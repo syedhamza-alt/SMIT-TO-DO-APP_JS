@@ -1,3 +1,4 @@
+
 let saveBtn = document.getElementById("saveBtn");
 let addBtn = document.getElementById("addBtn");
 let inputField = document.getElementById("toDoInput");
@@ -6,7 +7,9 @@ let deleteAllBtn = document.getElementById("deleteAllBtn");
 deleteAllBtn.style.display="none"
 let editLi = null;
 saveBtn.style.display = "none";
-let todoInput = document.getElementById("toDoInput").value="";
+let todoInput = document.getElementById("toDoInput");
+let todoInputValue = todoInput.value;
+
 
 addBtn.addEventListener("click", function () {
    let todoInput = document.getElementById("toDoInput");
@@ -47,14 +50,22 @@ addBtn.addEventListener("click", function () {
   } else {
     alert("Please Input To Do");
   }
-  saveBtn.addEventListener("click", function () {
+  
+  todoInput.value = "";
+});
+saveBtn.addEventListener("click", function () {
+  if (todoInput.value.trim() === "") {
+    alert("Please fill input first");
+  } else {
     saveBtn.style.display = "none";
     addBtn.style.display = "inline-block";
-    editLi.childNodes[0].nodeValue = todoInput.value;
+    let textNode = editLi.childNodes[0];
+    textNode.nodeValue = todoInput.value;
     todoInput.value = "";
-  });
-  todoInput.value = "";  
+  }
 });
+
+
 deleteAllBtn.addEventListener("click", function () {
   let confirmText="Do you want to delete all the to do's";
   if (confirm(confirmText) == true) {
